@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{16:function(t,e,n){"use strict";n.r(e);var a={},r=n(2),s=Object(r.a)(a,(function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)}),[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{attrs:{id:"list"}},[n("h1",[t._v("page: list")])])}],!1,null,"6c0a42fa",null);e.default=s.exports}}]);

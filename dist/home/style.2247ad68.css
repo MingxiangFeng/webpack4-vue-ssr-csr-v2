@@ -1,0 +1,21 @@
+
+#app{
+  font-size: 26px;
+  color: blue;
+}
+
+
+.progress[data-v-0e02eb9c] {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 2px;
+  width: 0%;
+  transition: width 0.2s, opacity 0.4s;
+  opacity: 1;
+  background-color: #efc14e;
+  z-index: 999999;
+}
+  
+
