@@ -1,17 +1,13 @@
-'use strict';
-
 const fs = require('fs');
 const glob = require('glob')
-const webpack = require('webpack');
-const baseWebpackConfig = require('./webpack.base.conf')
 const path = require('path');
+const { resolve } = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { merge } = require('webpack-merge');
-// const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-
-const node_env = process.env.NODE_ENV === 'development' ? 'development' : 'production'
-const isProd = process.env.NODE_ENV === 'production'
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {merge} = require('webpack-merge');
+const base = require('./webpack.base.conf.js');
 
 const setMPA = () => {
   const entry = {};
@@ -57,7 +53,7 @@ const setMPA = () => {
         }
       }
 
-      entry[pageName] = entryPath;
+      entry[pageName] = ['babel-polyfill', entryPath];
 
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
@@ -88,78 +84,85 @@ const setMPA = () => {
     htmlWebpackPlugins
   }
 }
-  
+
 const { entry, htmlWebpackPlugins } = setMPA();
 
-const config = merge(baseWebpackConfig, {
-  mode: node_env,
+let config = merge(base, {
   entry,
-  output: {
-    path: path.join(__dirname, '../dist'),
-    filename: '[name]/[id].[chunkhash:8].js',
-    chunkFilename: 'chunk/js/[id].[chunkhash:8].js',
-    // chunkFilename: (pathData) => {
-    //   const runtimeName = pathData.chunk.runtime
-    //   return `${runtimeName}/[name].[chunkhash:8].js`
-    // },
-		publicPath: '/'
-  },
-  module: {
-    rules: [
-      // {
-      //   test: /\.scss$/,
-      //   // 'postcss-loader'
-      //   use: isProd ? [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] 
-      //     : ['vue-style-loader', 'css-loader', 'sass-loader'],
-      // },
-      {
-        test: /\.css$/,
-        // 'postcss-loader'
-        use: isProd ? [MiniCssExtractPlugin.loader, 'css-loader'] 
-          : ['vue-style-loader', 'css-loader'],
-      }
-    ]
-  },
   plugins: [
-		new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(node_env)
-    }),
-    // new webpack.ProgressPlugin({
-    //   activeModules: false,
-    //   entries: true,
-    //   handler(percentage, message, ...args) {
-    //     // e.g. Output each progress message directly to the console:
-    //     // console.info('percentage==', percentage, 'message==', message, 'args===', ...args);
+    // new HtmlWebpackPlugin({
+    //   filename: 'home/index.html',
+    //   template: resolve(__dirname, '../src/home/client.html'),
+    //   minify: { // 压缩的方式
+    //     removeComments: false,
+    //     collapseWhitespace: true,
+    //     removeAttributeQuotes: true,
     //   },
-    //   modules: true,
-    //   modulesCount: 5000,
-    //   profile: false,
-    //   dependencies: true,
-    //   dependenciesCount: 10000,
-    //   percentBy: null,
     // }),
-  ].concat(htmlWebpackPlugins),
-})
 
-if (isProd) {
-  delete config.devtool;
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.VUE_ENV': '"client"',
+    }),
+  ].concat(htmlWebpackPlugins),
+});
+
+if (process.env.NODE_ENV === 'production') {
+  delete config.devtool; // 删除devtool
+  config.output.filename = 'js/[name].[chunkhash:8].min.js';
+  config.module.rules.push(
+    {
+      test: /\.css$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader'],
+    }
+  )
   config.plugins.push(
-    new MiniCssExtractPlugin(
-      {
-        filename: '[name]/style.[contenthash:8].css',
-        chunkFilename: 'chunk/css/[name].[chunkhash:8].css',
-        // chunkFilename: ({chunk}) => {
-        //   return `${chunk.runtime}/[id].[contenthash:8].css`
-        // }
-      }
-    )
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css'
+    })
   )
 } else {
-  config.output.filename = '[name].js',
+  config.module.rules.push(
+    {
+      test: /\.css$/,
+      // 'style-loader',
+      use: ['vue-style-loader',  'css-loader'],
+    }
+  )
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin()
   )
 }
-console.log('isProd===', isProd);
+config.optimization.splitChunks = {
+  chunks: 'async',
+  minSize: 30000,
+  maxSize: 0,
+  minChunks: 1,
+  maxAsyncRequests: 5,
+  maxInitialRequests: 3,
+  automaticNameDelimiter: '~',
+  name: true,
+  cacheGroups: {
+    vendors: {
+      test: /[\\/]node_modules[\\/]/,
+      priority: -10
+    },
+    default: {
+      minChunks: 2,
+      priority: -20,
+      reuseExistingChunk: true
+    }
+  }
+}
+config.plugins = config.plugins.concat([
+  new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: resolve(__dirname, '../static'),
+        to: 'static',
+      }
+    ]
+  }),
+]);
 
 module.exports = config;

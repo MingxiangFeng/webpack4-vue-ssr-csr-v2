@@ -2,93 +2,35 @@
 - mpa, csr&ssr
 - webpack5, vue2.x, babel8.x, css, scss
 - 支持history模式（需在start.js中配置）
-- 默认所有页面支持vw（不需要支持的页面需要在postcss.config.js中配置）
-- 其他
-  - 文件夹快捷引入
-    - src文件夹 @
-    - static文件夹 @static
+- spa, ssr, webpack4.x, vue2.x
+
 # 运行
 ```bash
-# 开发环境运行
+# 安装依赖
+npm i
+# 开发，服务启动后，访问localhost:9998
 npm run dev
-# 生产构建
+# 构建
 npm run build
 ```
+
 # 部署
-使用pm2进行部署，命令```npm run start```。关于pm2，请查看https://pm2.keymetrics.io/
+使用pm2在服务器上部署, 启动命令```npm run start``` pm2指南文档：https://pm2.keymetrics.io/
 
-# 约定
-- 开发文件目录为src目录，每个目录都是一个vue单页应用。
-- 按照页面的耦合程度进行判断，一个路由页作为一个单页应用还是多页路由页作为一个单页应用。
-- 其他
-  - 当前src中home目录为ssr页面目录
 
-# 开发过程遇到的问题
-## 无法热更新的问题 "webpack-hot-middleware": "^2.25.0",
-- 系webpack5的bug
-- 解决方法安装
-  - "webpack-hot-middleware": "git+https://github.com/lukeapage/webpack-hot-middleware#2cdfe0d0111dab6432b8683112fd2d17a5e80572"
-
-## [vue-server-renderer-webpack-plugin] webpack config `output.libraryTarget` should be "commonjs2".
-- 解决方法
-  - 修改 /node_modules/vue-server-renderer/server-plugin.js
-    ```javascript
-    var validate = function (compiler) {
-      if (compiler.options.target !== 'node') {
-        warn('webpack config `target` should be "node".');
-      }
-    -  if (compiler.options.output && compiler.options.output.libraryTarget !== 'commonjs2') {
-    +  if (compiler.options.output && compiler.options.output.library.type !== 'commonjs2') {
-        warn('webpack config `output.libraryTarget` should be "commonjs2".');
-      }
-
-      if (!compiler.options.externals) {
-        tip(
-          'It is recommended to externalize dependencies in the server build for ' +
-          'better build performance.'
-        );
-      }
-    };
-    ```
-    ```javascript
-    - var entryAssets = entryInfo.assets.filter(isJS);
-    + var entryAssets = entryInfo.assets.filter(file => isJS(file.name));
-
-    if (entryAssets.length > 1) {
-      throw new Error(
-        "Server-side bundle should have one single entry file. " +
-        "Avoid using CommonsChunkPlugin in the server config."
-      )
-    }
-
-    var entry = entryAssets[0];
-    - if (!entry || typeof entry !== 'string') {
-    + if (!entry || typeof entry.name !== 'string') {
-      throw new Error(
-        ("Entry \"" + entryName + "\" not found. Did you specify the correct entry option?")
-      )
-    }
-
-    var bundle = {
-    + entry: entry.name,
-      files: {},
-      maps: {}
-    }
-    ```
-  - 参考文档：https://github.com/vuejs/vue/issues/11718
-
-## chunkFilename 使用[runtime]/[name].[chunkhash:8].js 导致运行时无法加载chunk文件
+# 开发问题记录
+- 使用style-loader报错： [Vue warn]: TypeError: Cannot read property 'content' of null 
+- 复现步骤
+  - 配置webpack的cache.type为filesystem, 开启缓存
+  - 初始化一个Vue3 Typescript的项目, 建立一个根单文件组件并使用ts版setup语法糖, 建立一个子单文件组件并使用ts版setup语法糖, 在根组件中导入子组件第一次编译, 正常通过能运行
+  - (补充, 这里漏了关键一步, 就是这里需要改动inside.vue的模板内容, 即让缓存失效, 然后再编译才会失败, 否则直接用缓存的话则不会失败)
+  - 后续编译, 编译失败, 报下述错误: [Vue warn]: TypeError: Cannot read property 'content' of null 
 - 解决办法
-  - 使用函数命名的形式
-    - ```
-      chunkFilename: (pathData) => {
-        const runtimeName = pathData.chunk.runtime
-        return `${runtimeName}/[name].[chunkhash:8].js`
-      }
-      ```
-## 单独引入样式文件时，import 'style.css' 与 import('style.css') 是有差异的。
-- 前者是bunddle, 后者是chunk并且将内联在js中
+  - 未解决：https://github.com/vuejs/vue-loader/issues/1747
+  - 能解决： entry中引入babel-polyfill
+查询资料：https://stackoverflow.com/questions/64766001/vue-server-side-rendering-error-in-beforecreate-hook-referenceerror-document
 
-## import './style.css'; 报错 // style-loader: Adds some css to the DOM by adding a <style> tag
-- 解决办法
-  - 
+# 其他推荐
+- webpack5构建csr与ssr的混合mpa架构，大型网站前端架构，最前沿！https://github.com/MingxiangFeng/webpack-vue-mpa-ssr-csr-v1
+- 使用webpack4.x和vue2.x搭建的服务端渲染单页应用。https://github.com/MingxiangFeng/webpack-vue-ssr-spa
+- 使用webpack5.x，vue2.x搭建的大型网站前端csr架构。https://github.com/MingxiangFeng/webpack-vue-csr-mpa

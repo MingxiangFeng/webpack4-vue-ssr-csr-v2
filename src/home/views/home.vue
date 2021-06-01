@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="title111">page: home</h1>
+    <h1>page: home1</h1>
     {{tips}}
     <div @click="clickMe">click me4</div>
     <div @click="toListPage">to List Page</div>
@@ -25,12 +25,8 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .home{
-  color: red;
-}
-.title111{
-  font-size: 22px;
-  color: gray;
+  color: pink;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>22321</h1>
     user's login status： {{login}}
     {{a}}
     <router-view />

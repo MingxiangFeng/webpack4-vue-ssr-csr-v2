@@ -1,6 +1,6 @@
 <template>
   <div>
-    list23222
+    list
     <router-view />
   </div>
 </template>

@@ -13,8 +13,7 @@ export function createRouter () {
         name: 'home',
         path: '/',
         component: () => import('../views/home.vue')
-      }
-      , {
+      }, {
         name: 'home-list',
         path: '/home-list',
         component: () => import('../views/list.vue')

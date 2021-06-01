@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped>
 #list{
   color: red;
 }

@@ -1,14 +1,24 @@
-'use strict';
-
-const path = require('path')
-const { resolve } = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { resolve, join } = require('path');
+const nodeModulesPath = resolve(__dirname, '../node_modules');
 const TerserPlugin = require('terser-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
-let config = {
-  devtool: 'cheap-source-map',
+const isPro = process.env.NODE_ENV === 'production'
+
+const config = {
+  mode: isPro ? 'production' : 'development',
+  devtool: 'cheap-module-eval-source-map',
+  // entry: {
+  //   'home': [
+  //     'babel-polyfill',
+  //     resolve(__dirname, '../src/home/entry-client.js'),
+  //   ],
+  // },
+  output: {
+    path: join(__dirname, '../dist'),
+    filename: '[name].js',
+    publicPath: '/'
+  },
   optimization: {
     minimize: true,
     minimizer: [
@@ -35,104 +45,45 @@ let config = {
   },
   module: {
     rules: [{
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            css: ['vue-style-loader', 'css-loader'],
-          },
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          css: ['vue-style-loader', 'css-loader'],
         },
-      }, {
-        test: /\.js(\?.*)?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-transform-runtime']
-        },
-        include: [path.join(__dirname, '../src'), path.join(__dirname, '../node_modules/webpack-dev-server/client')],
-        exclude: resolve(__dirname, '../node_modules'),
-      }, 
-      {
-        test: /\.html$/i,
-        loader: 'raw-loader'
-      }, {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name(resourcePath, resourceQuery) {
-            const matchs = resourcePath.split('/')
-            let index = 0 
-            matchs.find((item, key) => {  
-              if (item === 'src') {
-                index = key
-              }
-            })
-            const rootName = matchs && matchs[index + 1]
-            return `${rootName}/images/[name].[hash:7].[ext]`
-          },
-          esModule: false
-        }
-      }, {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 1000,
-          name(resourcePath, resourceQuery) {
-            const matchs = resourcePath.split('/')
-            let index = 0 
-            matchs.find((item, key) => {  
-              if (item === 'src') {
-                index = key
-              }
-            })
-            const rootName = matchs && matchs[index + 1]
-            return `${rootName}/video/[name].[hash:7].[ext]`
-          },
-          esModule: false
-        }
       },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 1000,
-          name(resourcePath, resourceQuery) {
-            const matchs = resourcePath.split('/')
-            let index = 0 
-            matchs.find((item, key) => {  
-              if (item === 'src') {
-                index = key
-              }
-            })
-            const rootName = matchs && matchs[index + 1]
-            return `${rootName}/font/[name].[hash:7].[ext]`
-          },
-          esModule: false
-        }
-      }],
+    }, {
+      test: /\.html$/i,
+      loader: 'raw-loader'
+    }, {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      exclude: nodeModulesPath,
+    }, {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'img/[name].[hash:7].[ext]',
+      },
+    }, {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'fonts/[name].[hash:7].[ext]',
+      },
+    }],
   },
+  plugins: [new VueLoaderPlugin()],
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.runtime.js',
-      '@': path.join(__dirname, '../src'),
-      '@static': path.join(__dirname, '../static')
-    }
+      '@': resolve('src'),
+      '@static': resolve('static'),
+      vue: 'vue/dist/vue.esm.js'
+    },
   },
-  plugins: [
-    new VueLoaderPlugin(),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, '../static'),
-          to: 'static',
-        }
-      ]
-    }),
-    new webpack.AutomaticPrefetchPlugin()
-  ]
 };
 
 module.exports = config;

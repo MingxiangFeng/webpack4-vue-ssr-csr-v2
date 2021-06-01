@@ -26,22 +26,27 @@ module.exports = function setupDevServer (app, cb) {
   let ready
   const readyPromise = new Promise(r => { ready = r })
   
+  // clientConfig.entry.home = ['webpack-hot-middleware/client?reload=true', ...clientConfig.entry.home]
   for (const key in clientConfig.entry) {
     const item = clientConfig.entry[key]
-    const ary = ['webpack-hot-middleware/client?reload=true', item]
+    const ary = ['webpack-hot-middleware/client?reload=true', ...item]
     clientConfig.entry[key] = ary
   }
+
   const clientCompiler = webpack(clientConfig);
   
   const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
     publicPath: clientConfig.output.publicPath,
+    serverSideRender: true 
   })
 
   app.use(devMiddleware)
 
   clientCompiler.hooks.done.tap('client', () => {
-    const fs = devMiddleware.fileSystem
-    const filePath = path.join(clientConfig.output.path, '/home/index.html');
+    const fs = devMiddleware.fileSystem;
+
+    const filePath = path.join(clientConfig.output.path, 'home/index.html');
+
     if (fs.existsSync(filePath)) {
       template = fs.readFileSync(filePath, 'utf-8');
       update()
@@ -63,6 +68,7 @@ module.exports = function setupDevServer (app, cb) {
     stats.warnings.forEach(err => console.warn(err));
 
     bundle = JSON.parse(readFile(mfs, 'home/vue-ssr-server-bundle.json'))
+
     update();
   });
 
