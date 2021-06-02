@@ -1,6 +1,10 @@
 
+*{
+  padding:0;
+  margin: 0;
+}
 #app{
-  font-size: 26px;
+  font-size: 4vw;
   color: blue;
 }
 
@@ -10,7 +14,7 @@
   top: 0px;
   left: 0px;
   right: 0px;
-  height: 2px;
+  height: 0.26667vw;
   width: 0%;
   transition: width 0.2s, opacity 0.4s;
   opacity: 1;
