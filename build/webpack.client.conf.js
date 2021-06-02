@@ -73,10 +73,6 @@ const setMPA = () => {
           },
         })
       );
-
-      // if (pageName == 'home') {
-      //   htmlWebpackPlugins.push(new VueSSRClientPlugin({filename: 'home/vue-ssr-client-manifest.json'}))
-      // }
     });
 
   return {
@@ -90,16 +86,6 @@ const { entry, htmlWebpackPlugins } = setMPA();
 let config = merge(base, {
   entry,
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   filename: 'home/index.html',
-    //   template: resolve(__dirname, '../src/home/client.html'),
-    //   minify: { // 压缩的方式
-    //     removeComments: false,
-    //     collapseWhitespace: true,
-    //     removeAttributeQuotes: true,
-    //   },
-    // }),
-
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
@@ -108,12 +94,12 @@ let config = merge(base, {
 });
 
 if (process.env.NODE_ENV === 'production') {
-  delete config.devtool; // 删除devtool
+  delete config.devtool;
   config.output.filename = 'js/[name].[chunkhash:8].min.js';
   config.module.rules.push(
     {
       test: /\.css$/,
-      use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
     }
   )
   config.plugins.push(
@@ -125,8 +111,7 @@ if (process.env.NODE_ENV === 'production') {
   config.module.rules.push(
     {
       test: /\.css$/,
-      // 'style-loader',
-      use: ['vue-style-loader',  'css-loader'],
+      use: ['vue-style-loader',  'css-loader', 'postcss-loader'],
     }
   )
   config.plugins.push(

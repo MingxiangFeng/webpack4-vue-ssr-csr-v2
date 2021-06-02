@@ -26,7 +26,6 @@ module.exports = function setupDevServer (app, cb) {
   let ready
   const readyPromise = new Promise(r => { ready = r })
   
-  // clientConfig.entry.home = ['webpack-hot-middleware/client?reload=true', ...clientConfig.entry.home]
   for (const key in clientConfig.entry) {
     const item = clientConfig.entry[key]
     const ary = ['webpack-hot-middleware/client?reload=true', ...item]

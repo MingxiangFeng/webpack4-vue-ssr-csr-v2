@@ -8,12 +8,6 @@ const isPro = process.env.NODE_ENV === 'production'
 const config = {
   mode: isPro ? 'production' : 'development',
   devtool: 'cheap-module-eval-source-map',
-  // entry: {
-  //   'home': [
-  //     'babel-polyfill',
-  //     resolve(__dirname, '../src/home/entry-client.js'),
-  //   ],
-  // },
   output: {
     path: join(__dirname, '../dist'),
     filename: '[name].js',
@@ -27,9 +21,9 @@ const config = {
         terserOptions: {
           ecma: undefined,
           compress: {
-            drop_console: true, // 删除所有的 `console` 语句, 还可以兼容ie浏览器
-            collapse_vars: true, // 内嵌定义了但是只用到一次的变量
-            reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
+            drop_console: true,
+            collapse_vars: true,
+            reduce_vars: true,
           },
           format: {
             comments: false,
