@@ -21,6 +21,10 @@ const config = merge(base, {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.s(a|c)ss$/,
+        use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      }
     ]
   },
   plugins: [

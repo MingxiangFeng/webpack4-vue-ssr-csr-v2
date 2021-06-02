@@ -100,6 +100,10 @@ if (process.env.NODE_ENV === 'production') {
     {
       test: /\.css$/,
       use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+    },
+    {
+      test: /\.s(a|c)ss$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
     }
   )
   config.plugins.push(
@@ -112,6 +116,10 @@ if (process.env.NODE_ENV === 'production') {
     {
       test: /\.css$/,
       use: ['vue-style-loader',  'css-loader', 'postcss-loader'],
+    }, 
+    {
+      test: /\.s(a|c)ss$/,
+      use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
     }
   )
   config.plugins.push(
