@@ -9,6 +9,7 @@
   - 文件夹快捷引入
     - src文件夹 @
     - static文件夹 @static
+  - 模板文件夹 template
 
 # 运行
 ```bash
