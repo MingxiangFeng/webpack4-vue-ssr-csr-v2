@@ -52,8 +52,9 @@ const setMPA = () => {
           templatePath = path.join(__dirname, p)
         }
       }
-
-      entry[pageName] = ['babel-polyfill', entryPath];
+      
+      // 'babel-polyfill',
+      entry[pageName] = [entryPath];
 
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({

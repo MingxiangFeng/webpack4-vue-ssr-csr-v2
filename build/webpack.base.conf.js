@@ -5,6 +5,28 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 const isPro = process.env.NODE_ENV === 'production'
 
+const optimization = {
+  minimize: true,
+  minimizer: [
+    new TerserPlugin({
+      parallel: 4,
+      terserOptions: {
+        ecma: undefined,
+        compress: {
+          drop_console: true,
+          collapse_vars: true,
+          reduce_vars: true,
+        },
+        format: {
+          comments: false,
+        },
+        ecma: 5
+      },
+      extractComments: false,
+    }),
+  ],
+}
+
 const config = {
   mode: isPro ? 'production' : 'development',
   devtool: 'cheap-module-eval-source-map',
@@ -13,27 +35,7 @@ const config = {
     filename: '[name].js',
     publicPath: '/'
   },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        parallel: 4,
-        terserOptions: {
-          ecma: undefined,
-          compress: {
-            drop_console: true,
-            collapse_vars: true,
-            reduce_vars: true,
-          },
-          format: {
-            comments: false,
-          },
-          ecma: 5
-        },
-        extractComments: false,
-      }),
-    ],
-  },
+  optimization: isPro ? optimization : {},
   externals: {
     simplemde: 'SimpleMDE',
   },
