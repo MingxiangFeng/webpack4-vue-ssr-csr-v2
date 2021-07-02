@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {merge} = require('webpack-merge');
 const base = require('./webpack.base.conf.js');
+const VueSSRClientPlugin = require('./lib/client-plugin');
 
 const setMPA = () => {
   const entry = {};
@@ -53,7 +54,6 @@ const setMPA = () => {
         }
       }
       
-      // 'babel-polyfill',
       entry[pageName] = [entryPath];
 
       htmlWebpackPlugins.push(
@@ -70,7 +70,7 @@ const setMPA = () => {
             removeAttributeQuotes: true,
             minifyCSS: true,
             minifyJS: true,
-            removeComments: pageName == 'home' ? false: true
+            removeComments: pageName == 'home' ? false: true // home不能移除tempalte.html中的注释
           },
         })
       );
@@ -91,6 +91,10 @@ let config = merge(base, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
     }),
+    new VueSSRClientPlugin({ // 对home目录做ClientMainifest构建
+      pageName: 'home',
+      filename: 'home/vue-ssr-client-manifest.json'
+    })
   ].concat(htmlWebpackPlugins),
 });
 

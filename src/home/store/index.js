@@ -1,10 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
-
-export function createStore () {
-  return new Vuex.Store({
+export function createStoreFn () {
+  return new createStore({
     state: {
       userInfo: null,
       login: false

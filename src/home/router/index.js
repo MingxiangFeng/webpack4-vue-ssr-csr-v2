@@ -1,13 +1,16 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+const {
+  createRouter,
+  createMemoryHistory,
+  createWebHistory,
+} = require('vue-router');
 
-Vue.use(Router)
+const isServer = typeof window === 'undefined';
 
-export function createRouter () {
-  return new Router({
-    mode: 'history',
-    fallback: false,
-    scrollBehavior: () => ({ y: 0 }),
+let history = isServer ? createMemoryHistory() : createWebHistory();
+
+export function createRoutFn () {
+  return new createRouter({
+    history,
     routes: [
       {
         name: 'home',

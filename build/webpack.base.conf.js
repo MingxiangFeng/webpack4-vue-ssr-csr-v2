@@ -11,7 +11,6 @@ const optimization = {
     new TerserPlugin({
       parallel: 4,
       terserOptions: {
-        ecma: undefined,
         compress: {
           drop_console: true,
           collapse_vars: true,
@@ -77,7 +76,7 @@ const config = {
     alias: {
       '@': resolve('src'),
       '@static': resolve('static'),
-      vue: 'vue/dist/vue.esm.js'
+      vue: 'vue/dist/vue.runtime.esm-bundler.js'
     },
   },
 };

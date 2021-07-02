@@ -2,7 +2,10 @@ const webpack = require('webpack');
 const {merge} = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 const base = require('./webpack.base.conf');
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
+// const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
+const VueSSRServerPlugin  = require('./lib/server-plugin');
+// const registerComponent = require.resolve('./lib/registerComponent');
+
 const { resolve } = require('path');
 const config = merge(base, {
   target: 'node',
@@ -17,6 +20,12 @@ const config = merge(base, {
   }),
   module: {
     rules:[
+      // // This loader registers components for async chunk inferrence
+      // {
+      //   test: /\.js$/,
+      //   resourceQuery: /^\?vue/,
+      //   use: registerComponent,
+      // },
       {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader', 'postcss-loader'],

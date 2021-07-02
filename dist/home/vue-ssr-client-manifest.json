@@ -1,0 +1,126 @@
+{
+  "publicPath": "/",
+  "all": [
+    "css/3.93e11acc71c42c4e0bbb.css",
+    "css/4.0ac2dae214ce2f27db65.css",
+    "css/5.068807641e21e048b862.css",
+    "css/6.259a214a8e683f4de378.css",
+    "css/detail.ca50a1f32e2a2479b76d.css",
+    "css/home.2d688b17b52f18d33741.css",
+    "css/list.5ce82cbbdc0a8670cbb5.css",
+    "js/3.327cd278.min.js",
+    "js/4.32657629.min.js",
+    "js/5.2b4222f9.min.js",
+    "js/6.ea070250.min.js",
+    "js/detail.5c1d6c4c.min.js",
+    "js/home.984e2c16.min.js",
+    "js/list.65673cc2.min.js",
+    "static/.gitignore",
+    "static/1.js"
+  ],
+  "initial": [
+    "css/home.2d688b17b52f18d33741.css",
+    "js/home.984e2c16.min.js"
+  ],
+  "async": [
+    "css/3.93e11acc71c42c4e0bbb.css",
+    "css/4.0ac2dae214ce2f27db65.css",
+    "css/5.068807641e21e048b862.css",
+    "css/6.259a214a8e683f4de378.css",
+    "css/detail.ca50a1f32e2a2479b76d.css",
+    "css/list.5ce82cbbdc0a8670cbb5.css",
+    "js/3.327cd278.min.js",
+    "js/4.32657629.min.js",
+    "js/5.2b4222f9.min.js",
+    "js/6.ea070250.min.js",
+    "js/detail.5c1d6c4c.min.js",
+    "js/list.65673cc2.min.js",
+    "static/1.js"
+  ],
+  "modules": {
+    "43cc4acf": [
+      5,
+      12
+    ],
+    "160eab0a": [
+      4,
+      11
+    ],
+    "022e58a6": [
+      5,
+      12
+    ],
+    "5874dece": [
+      6,
+      13
+    ],
+    "6898d56a": [
+      5,
+      12
+    ],
+    "7bb63eea": [
+      6,
+      13
+    ],
+    "9aa19e10": [
+      4,
+      11
+    ],
+    "68c2f6bc": [
+      0,
+      7
+    ],
+    "68a6c7ba": [
+      3,
+      10
+    ],
+    "3b1faa66": [
+      1,
+      8
+    ],
+    "4f9fef0c": [
+      2,
+      9
+    ],
+    "28b6a555": [
+      4,
+      11
+    ],
+    "5ad7381c": [
+      4,
+      11
+    ],
+    "180a2043": [
+      5,
+      12
+    ],
+    "1c3b1674": [
+      6,
+      13
+    ],
+    "15aa764f": [
+      5,
+      12
+    ],
+    "b04983fe": [
+      0,
+      7
+    ],
+    "28996b14": [
+      3,
+      10
+    ],
+    "0ab5dc14": [
+      0,
+      7
+    ],
+    "c8341a64": [
+      2,
+      9
+    ],
+    "7de078ff": [
+      1,
+      8
+    ]
+  }
+}

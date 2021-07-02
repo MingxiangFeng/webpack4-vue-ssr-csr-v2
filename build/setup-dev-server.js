@@ -14,12 +14,17 @@ const readFile = (fs, file) => {
 
 module.exports = function setupDevServer (app, cb) {
   let bundle;
-  let template;
+  // let template;
+  let clientManifest;
 
   const update = () => {
-    if (bundle && template) {
+    // if (bundle && template) {
+    //   ready()
+    //   cb(bundle, template)
+    // }
+    if (bundle && clientManifest) {
       ready()
-      cb(bundle, template)
+      cb(bundle, clientManifest)
     }
   }
 
@@ -41,14 +46,25 @@ module.exports = function setupDevServer (app, cb) {
 
   app.use(devMiddleware)
 
-  clientCompiler.hooks.done.tap('client', () => {
+  clientCompiler.hooks.done.tap('client', (stats) => {
     const fs = devMiddleware.fileSystem;
 
-    const filePath = path.join(clientConfig.output.path, 'home/index.html');
-
+    // const filePath = path.join(clientConfig.output.path, 'home/index.html');
+    // if (fs.existsSync(filePath)) {
+    //   template = fs.readFileSync(filePath, 'utf-8');
+    //   update()
+    // }
+    const filePath = path.join(clientConfig.output.path, 'home/vue-ssr-client-manifest.json');
     if (fs.existsSync(filePath)) {
-      template = fs.readFileSync(filePath, 'utf-8');
-      update()
+      stats = stats.toJson();
+      stats.errors.forEach((err) => console.error(err));
+      stats.warnings.forEach((err) => console.warn(err));
+      if (stats.errors.length) return;
+      clientManifest = JSON.parse(
+        fs.readFileSync(filePath, 'utf-8')
+        // readFile(devMiddleware.fileSystem, 'vue-ssr-client-manifest.json')
+      );
+      update();
     }
   });
 
