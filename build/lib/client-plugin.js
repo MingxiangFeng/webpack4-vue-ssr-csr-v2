@@ -1,7 +1,5 @@
 'use strict';
 
-/*  */
-
 var isJS = function (file) { return /\.js(\?[^.]+)?$/.test(file); };
 
 var isCSS = function (file) { return /\.css(\?[^.]+)?$/.test(file); };
@@ -78,8 +76,11 @@ VueSSRClientPlugin.prototype.apply = function apply (compiler) {
 
     var allFiles = uniq(stats.assets
       .map(function (a) { return a.name; }));
-
+    
     var points = { pageName: stats.entrypoints[pageName] }
+    var exludePoints = Object.keys(stats.entrypoints).filter(item => {
+      if(item !== pageName) return item
+    })
 
     var initialFiles = uniq(Object.keys(points)
       .map(function (name) { return points[name].assets; })
@@ -91,11 +92,20 @@ VueSSRClientPlugin.prototype.apply = function apply (compiler) {
       .filter(function (file) { return isJS(file) || isCSS(file); })
       .filter(function (file) { return initialFiles.indexOf(file) < 0; });
 
+    console.log('asyncFiles==', asyncFiles);
+
+    var asFiles = asyncFiles.filter(item => {
+      var a = exludePoints.find(i => {
+        return item.indexOf(i) >= 0
+      })
+      return !a
+    })
+
     var manifest = {
       publicPath: stats.publicPath,
       all: allFiles,
       initial: initialFiles,
-      async: asyncFiles,
+      async: asFiles, //asyncFiles,
       modules: { /* [identifier: string]: Array<index: number> */ }
     };
 

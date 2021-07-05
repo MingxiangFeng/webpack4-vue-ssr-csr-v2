@@ -73,14 +73,13 @@ async function render (req, res) {
     handleError(err);
   }
 
-  let { renderStyles, renderResourceHints, renderScripts } = context;
+  const { renderStyles, renderScripts } = context;
   const html = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  ${renderResourceHints()}
   ${renderStyles()}
   <title>SSR Vue 3</title>
   </head>
@@ -88,7 +87,7 @@ async function render (req, res) {
     <div id="app">${page}</div>
     ${renderScripts()}
     ${renderState(context)}
-    </body>
+  </body>
 </html>
 `;
   res.setHeader('Content-Type', 'text/html');
