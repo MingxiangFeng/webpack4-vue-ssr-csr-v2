@@ -6,21 +6,21 @@
     "css/5.068807641e21e048b862.css",
     "css/6.259a214a8e683f4de378.css",
     "css/detail.ca50a1f32e2a2479b76d.css",
-    "css/home.2d688b17b52f18d33741.css",
+    "css/home.2a659ebddbec94cfa1a5.css",
     "css/list.5ce82cbbdc0a8670cbb5.css",
     "js/3.327cd278.min.js",
     "js/4.32657629.min.js",
     "js/5.2b4222f9.min.js",
     "js/6.ea070250.min.js",
     "js/detail.5c1d6c4c.min.js",
-    "js/home.984e2c16.min.js",
-    "js/list.65673cc2.min.js",
+    "js/home.3f877b7c.min.js",
+    "js/list.8297af80.min.js",
     "static/.gitignore",
     "static/1.js"
   ],
   "initial": [
-    "css/home.2d688b17b52f18d33741.css",
-    "js/home.984e2c16.min.js"
+    "css/home.2a659ebddbec94cfa1a5.css",
+    "js/home.3f877b7c.min.js"
   ],
   "async": [
     "css/3.93e11acc71c42c4e0bbb.css",
@@ -34,7 +34,7 @@
     "js/5.2b4222f9.min.js",
     "js/6.ea070250.min.js",
     "js/detail.5c1d6c4c.min.js",
-    "js/list.65673cc2.min.js",
+    "js/list.8297af80.min.js",
     "static/1.js"
   ],
   "modules": {
@@ -89,10 +89,6 @@
     "5ad7381c": [
       4,
       11
-    ],
-    "180a2043": [
-      5,
-      12
     ],
     "1c3b1674": [
       6,

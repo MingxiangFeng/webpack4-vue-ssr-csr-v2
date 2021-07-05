@@ -46,7 +46,7 @@ const config = merge(base, {
     }),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
-    })
+    }),
   ],
 });
 module.exports = config;

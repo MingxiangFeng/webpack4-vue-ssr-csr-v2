@@ -48,7 +48,7 @@ const config = {
         },
       },
     }, {
-      test: /\.html$/i,
+      test: /\.(html|txt)(\?.*)?$/i,
       loader: 'raw-loader'
     }, {
       test: /\.js$/,

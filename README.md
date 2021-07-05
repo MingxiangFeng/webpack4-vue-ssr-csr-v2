@@ -58,6 +58,17 @@ npm run build
     - 版本与webpack对不上
   - 解决办法
     - 版本降级 "node-sass": "^4.14.1", "sass-loader": "^8.0.2",
+- 升级vue3.x编译报错
+  - ERROR in ./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js 763:13
+    Module parse failed: Unexpected token (763:13)
+    You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+    | }
+    | class RefImpl {
+    >     _rawValue;
+    |     _shallow;
+    |     _value;
+  - 解决办法
+    - 
 
 
 # 其他推荐
