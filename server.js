@@ -81,6 +81,9 @@ async function render (req, res) {
   let page;
   try {
     page = await renderer.renderToString(context); // 新版本@vue/server-renderer，只返回data部分
+    console.log('renderer===', renderer);
+    // const style = await render.ssrRenderStyle(context)
+    // console.log('style===', style);
     // if (!isProd) {
     //   console.log(`whole request: ${Date.now() - s}ms`)
     // }
