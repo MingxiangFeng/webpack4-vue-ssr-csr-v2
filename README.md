@@ -1,8 +1,8 @@
-# 较前沿，稳定的，大型网站前端架构。
+# 前沿，稳定的，大型网站前端架构。
 
 # 特性
 - mpa, csr&ssr
-- webpack4, vue2.x, babel8.x, css, scss
+- webpack4, vue3.x, babel8.x, css, scss
 - 支持history模式（需在start.js中配置）
 - 默认所有页面支持vw（不需要支持的页面需要在postcss.config.js中配置）
 - 其他
@@ -75,7 +75,11 @@ npm run build
       loader: 'raw-loader'
     }
     ```
-
+- 样式后加载问题
+  -  因为vue3构建配置，样式目前无法通过style标签进行内联的缘故，
+     - 开发环境下，样式目前后加载
+     - 生产环境下，路由页不能使用延迟加载方案，否则样式会后加载
+     - 此问题后续跟进解决。
 
 # 其他推荐
 - 使用webpack5.x和vue2.x构建csr与ssr的混合mpa架构，大型网站前端架构，前沿！https://github.com/MingxiangFeng/webpack-vue-mpa-ssr-csr-v1
@@ -84,7 +88,5 @@ npm run build
 
 
 # Q&S
-- Q: 为什么静态渲染时，样式后渲染呢？
-- S: 本架构开发环境下，静态渲染的编程过程时，没有提取样式文件，所以样式后渲染。生产环境下，样式已提取，并在html文件的head中引入，不会出现此种情况。
-- Q: 什么时候支持webpack5.x，vue3.x 的架构呢？
-- S: 快了，预计2021年6月底7月初能与大家见面。
+- Q: 为什么ssr渲染，静态渲染时，样式后渲染呢？
+- S: 本架构开发环境下，静态渲染的编程过程时，没有提取样式文件，所以样式后渲染。生产环境下，样式已提取，并在html文件的head中引入，不会出现此种情况。ssr渲染时，因为目前构建依赖包不能进行inline css，所以样式无法内联，生产环境无此问题

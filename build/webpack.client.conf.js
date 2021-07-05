@@ -10,6 +10,8 @@ const {merge} = require('webpack-merge');
 const base = require('./webpack.base.conf.js');
 const VueSSRClientPlugin = require('./lib/client-plugin');
 
+const isPro = process.env.NODE_ENV === 'production'
+
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
@@ -26,6 +28,8 @@ const setMPA = () => {
 
       if (match && match[1]) {
         pageName = match && match[1]
+        if (pageName === 'home' && isPro) return
+
         entryPath = entryFile
 
         const p = `../src/${pageName}/template.html`
@@ -84,6 +88,11 @@ const setMPA = () => {
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
+!isPro && htmlWebpackPlugins.push(new VueSSRClientPlugin({ // 对home目录做ClientMainifest构建
+  pageName: 'home',
+  filename: 'home/vue-ssr-client-manifest.json'
+}))
+
 let config = merge(base, {
   entry,
   plugins: [
@@ -91,10 +100,6 @@ let config = merge(base, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
     }),
-    new VueSSRClientPlugin({ // 对home目录做ClientMainifest构建
-      pageName: 'home',
-      filename: 'home/vue-ssr-client-manifest.json'
-    })
   ].concat(htmlWebpackPlugins),
 });
 

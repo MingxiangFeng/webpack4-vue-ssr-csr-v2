@@ -4,9 +4,26 @@ export function createStoreFn () {
   return new createStore({
     state: {
       userInfo: null,
-      login: false
+      login: false,
+      mock: null
     },
-    mutations: {},
-    actions: {},
+    mutations: {
+      setMockData(state, payload) {
+        state.mock = payload
+      }
+    },
+    actions: {
+      async mockDataFn({commit}) {
+        return new Promise(resolve => {
+          const mock = {
+            content: 'mock home data!'
+          }
+          setTimeout(() => {
+            resolve(mock)
+            commit('setMockData', mock)
+          }, 1000)
+        })
+      }
+    },
   })
 }

@@ -1,21 +1,14 @@
-const fs = require('fs')
 const path = require('path')
-const LRU = require('lru-cache')
 const express = require('express')
-// const favicon = require('serve-favicon')
 const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
-// const { createBundleRenderer } = require('vue-server-renderer')
 const { createBundleRenderer } = require('vue-bundle-renderer');
 const history = require('connect-history-api-fallback')
 const serialize = require('serialize-javascript');
 
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
-const serverInfo =
-  `express/${require('express/package.json').version} ` + ''
-  // `vue-server-r enderer/${require('vue-server-renderer/package.json').version}`
 
 const app = express()
 
@@ -25,11 +18,6 @@ const serve = (path, cache) => express.static(resolve(path), {
 
 function createRenderer(bundle, clientManifest) {
   return createBundleRenderer(bundle, {
-    // template,
-    // cache: require('lru-cache')({
-    //     max: 1000,
-    //     maxAge: 1000 * 60 * 15,
-    // }),
     runInNewContext: false,
     basedir: resolve('./dist'),
     clientManifest,
@@ -37,12 +25,9 @@ function createRenderer(bundle, clientManifest) {
   });
 }
 
-
+// ssr渲染处理函数
 async function render (req, res) {
   const s = Date.now()
-
-  // res.setHeader("Content-Type", "text/html")
-  res.setHeader("Server", serverInfo)
 
   const handleError = err => {
     if (err.url) {
@@ -81,46 +66,31 @@ async function render (req, res) {
   let page;
   try {
     page = await renderer.renderToString(context); // 新版本@vue/server-renderer，只返回data部分
-    console.log('renderer===', renderer);
-    // const style = await render.ssrRenderStyle(context)
-    // console.log('style===', style);
-    // if (!isProd) {
-    //   console.log(`whole request: ${Date.now() - s}ms`)
-    // }
-    // res.send(page)
+    if (!isProd) {
+      console.log(`whole request: ${Date.now() - s}ms`)
+    }
   } catch (err) {
     handleError(err);
   }
 
   let { renderStyles, renderResourceHints, renderScripts } = context;
-
-  // TODO: Use loadash template
   const html = `
-        <!DOCTYPE html>
-            <html lang="en">
-              <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              ${renderResourceHints()}
-              ${renderStyles()}
-              <title>SSR Vue 3</title>
-              </head>
-              <body>
-                <div id="app">${page}</div>
-                ${renderScripts()}
-                ${renderState(context)}
-                </body>
-            </html>
-        `;
-
-  // // print page to file for inspection
-  // if (!isProd) {
-  //   fs.writeFile('rendered.html', html, (err) => {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //   });
-  // }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ${renderResourceHints()}
+  ${renderStyles()}
+  <title>SSR Vue 3</title>
+  </head>
+  <body>
+    <div id="app">${page}</div>
+    ${renderScripts()}
+    ${renderState(context)}
+    </body>
+</html>
+`;
   res.setHeader('Content-Type', 'text/html');
   res.send(html);
 }
@@ -140,8 +110,7 @@ app.use(history({
     {
       from: /^\/home-list(\/)?.*/,
       to:  '/home-list'
-    },
-    { 
+    }, { 
       from: /^\/detail(\/)?.*/,
       to:  '/detail/index.html'
     }, {

@@ -51,7 +51,7 @@ const config = {
       test: /\.(html|txt)(\?.*)?$/i,
       loader: 'raw-loader'
     }, {
-      test: /\.js$/,
+      test: /\.m?js$/,
       loader: 'babel-loader',
       exclude: nodeModulesPath,
     }, {

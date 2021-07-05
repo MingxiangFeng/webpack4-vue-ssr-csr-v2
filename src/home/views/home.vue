@@ -4,14 +4,23 @@
     {{tips}}
     <div @click="clickMe">click me4</div>
     <div @click="toListPage">to List Page</div>
+    mock.content===={{mock.content}}
   </div>
 </template>
 
 <script>
 export default {
+  serverPrefetch() {
+    return this.$store.dispatch('mockDataFn')
+  },
   data() {
     return {
       tips: ''
+    }
+  },
+  computed: {
+    mock() {
+      return this.$store.state.mock
     }
   },
   methods: {

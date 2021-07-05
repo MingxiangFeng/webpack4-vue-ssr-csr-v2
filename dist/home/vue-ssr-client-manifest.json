@@ -1,122 +1,75 @@
 {
   "publicPath": "/",
   "all": [
-    "css/3.93e11acc71c42c4e0bbb.css",
-    "css/4.0ac2dae214ce2f27db65.css",
-    "css/5.068807641e21e048b862.css",
-    "css/6.259a214a8e683f4de378.css",
-    "css/detail.ca50a1f32e2a2479b76d.css",
-    "css/home.2a659ebddbec94cfa1a5.css",
-    "css/list.5ce82cbbdc0a8670cbb5.css",
-    "js/3.327cd278.min.js",
-    "js/4.32657629.min.js",
-    "js/5.2b4222f9.min.js",
-    "js/6.ea070250.min.js",
-    "js/detail.5c1d6c4c.min.js",
-    "js/home.3f877b7c.min.js",
-    "js/list.8297af80.min.js",
+    "css/1.068807641e21e048b862.css",
+    "css/home.419b8ef8c825f5f09ad8.css",
+    "home/index.html",
+    "js/1.c8333f8d.min.js",
+    "js/home.1da40357.min.js",
     "static/.gitignore",
     "static/1.js"
   ],
   "initial": [
-    "css/home.2a659ebddbec94cfa1a5.css",
-    "js/home.3f877b7c.min.js"
+    "css/home.419b8ef8c825f5f09ad8.css",
+    "js/home.1da40357.min.js"
   ],
   "async": [
-    "css/3.93e11acc71c42c4e0bbb.css",
-    "css/4.0ac2dae214ce2f27db65.css",
-    "css/5.068807641e21e048b862.css",
-    "css/6.259a214a8e683f4de378.css",
-    "css/detail.ca50a1f32e2a2479b76d.css",
-    "css/list.5ce82cbbdc0a8670cbb5.css",
-    "js/3.327cd278.min.js",
-    "js/4.32657629.min.js",
-    "js/5.2b4222f9.min.js",
-    "js/6.ea070250.min.js",
-    "js/detail.5c1d6c4c.min.js",
-    "js/list.8297af80.min.js",
+    "css/1.068807641e21e048b862.css",
+    "js/1.c8333f8d.min.js",
     "static/1.js"
   ],
   "modules": {
+    "4c765757": [
+      1,
+      4
+    ],
+    "a25347dc": [
+      1,
+      4
+    ],
+    "e733299a": [
+      1,
+      4
+    ],
+    "0ee66690": [
+      1,
+      4
+    ],
+    "cd4816d6": [
+      1,
+      4
+    ],
+    "63d98702": [
+      1,
+      4
+    ],
     "43cc4acf": [
-      5,
-      12
+      1,
+      4
     ],
-    "160eab0a": [
-      4,
-      11
-    ],
-    "022e58a6": [
-      5,
-      12
-    ],
-    "5874dece": [
-      6,
-      13
+    "67bf42a8": [
+      1,
+      4
     ],
     "6898d56a": [
-      5,
-      12
-    ],
-    "7bb63eea": [
-      6,
-      13
-    ],
-    "9aa19e10": [
-      4,
-      11
-    ],
-    "68c2f6bc": [
-      0,
-      7
-    ],
-    "68a6c7ba": [
-      3,
-      10
-    ],
-    "3b1faa66": [
       1,
-      8
+      4
     ],
     "4f9fef0c": [
-      2,
-      9
-    ],
-    "28b6a555": [
-      4,
-      11
-    ],
-    "5ad7381c": [
-      4,
-      11
-    ],
-    "1c3b1674": [
-      6,
-      13
+      0,
+      3
     ],
     "15aa764f": [
-      5,
-      12
-    ],
-    "b04983fe": [
-      0,
-      7
-    ],
-    "28996b14": [
-      3,
-      10
-    ],
-    "0ab5dc14": [
-      0,
-      7
+      1,
+      4
     ],
     "c8341a64": [
-      2,
-      9
+      0,
+      3
     ],
-    "7de078ff": [
+    "3db6af08": [
       1,
-      8
+      4
     ]
   }
 }
