@@ -68,7 +68,13 @@ npm run build
     |     _shallow;
     |     _value;
   - 解决办法
-    - 
+    - raw-loader 添加.txt
+    ```javascript
+    {
+      test: /\.(html|txt)(\?.*)?$/i,
+      loader: 'raw-loader'
+    }
+    ```
 
 
 # 其他推荐
