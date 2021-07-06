@@ -1,19 +1,17 @@
 import Home from '../views/home.vue'
 
 const {
-  createRouter,
+  createRouter: CreateRouter,
   createMemoryHistory,
-  createWebHistory,
-} = require('vue-router');
+  createWebHistory
+} = require('vue-router')
 
-const isServer = typeof window === 'undefined';
+const isServer = typeof window === 'undefined'
 
-let history = isServer ? createMemoryHistory() : createWebHistory();
+const history = isServer ? createMemoryHistory() : createWebHistory()
 
-
-
-export function createRoutFn () {
-  return new createRouter({
+export function createRoutFn() {
+  return new CreateRouter({
     history,
     routes: [
       {

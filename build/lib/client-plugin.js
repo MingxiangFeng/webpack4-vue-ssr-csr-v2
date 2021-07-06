@@ -92,8 +92,6 @@ VueSSRClientPlugin.prototype.apply = function apply (compiler) {
       .filter(function (file) { return isJS(file) || isCSS(file); })
       .filter(function (file) { return initialFiles.indexOf(file) < 0; });
 
-    console.log('asyncFiles==', asyncFiles);
-
     var asFiles = asyncFiles.filter(item => {
       var a = exludePoints.find(i => {
         return item.indexOf(i) >= 0

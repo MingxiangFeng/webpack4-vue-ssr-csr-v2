@@ -1,7 +1,7 @@
-import { createStore } from 'vuex'
+import { createStore as CreateStore } from 'vuex'
 
-export function createStoreFn () {
-  return new createStore({
+export function createStoreFn() {
+  return new CreateStore({
     state: {
       userInfo: null,
       login: false,
@@ -13,7 +13,7 @@ export function createStoreFn () {
       }
     },
     actions: {
-      async mockDataFn({commit}) {
+      async mockDataFn({ commit }) {
         return new Promise(resolve => {
           const mock = {
             content: 'mock home data!'
@@ -24,6 +24,6 @@ export function createStoreFn () {
           }, 1000)
         })
       }
-    },
+    }
   })
 }

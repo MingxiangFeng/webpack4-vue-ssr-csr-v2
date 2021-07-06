@@ -1,24 +1,28 @@
 {
   "publicPath": "/",
   "all": [
-    "css/1.068807641e21e048b862.css",
-    "css/home.419b8ef8c825f5f09ad8.css",
+    "css/1.68e6f736ad9faf13c490.css",
+    "css/home.8460bb31a49e3610889f.css",
     "home/index.html",
-    "js/1.c8333f8d.min.js",
-    "js/home.4ebca2ca.min.js",
-    "static/.gitignore",
+    "js/1.9cfc0021.min.js",
+    "js/home.016a3e82.min.js",
+    "static/.gitkeep",
     "static/1.js"
   ],
   "initial": [
-    "css/home.419b8ef8c825f5f09ad8.css",
-    "js/home.4ebca2ca.min.js"
+    "css/home.8460bb31a49e3610889f.css",
+    "js/home.016a3e82.min.js"
   ],
   "async": [
-    "css/1.068807641e21e048b862.css",
-    "js/1.c8333f8d.min.js",
+    "css/1.68e6f736ad9faf13c490.css",
+    "js/1.9cfc0021.min.js",
     "static/1.js"
   ],
   "modules": {
+    "94099156": [
+      0,
+      3
+    ],
     "4c765757": [
       1,
       4
@@ -59,15 +63,11 @@
       0,
       3
     ],
-    "15aa764f": [
+    "0d6c48a5": [
       1,
       4
     ],
-    "c8341a64": [
-      0,
-      3
-    ],
-    "3db6af08": [
+    "0d5cc38f": [
       1,
       4
     ]

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    user's login status： {{login}}
-    <div class="theme">{{a}}</div>
+    user's login status： {{ login }}
+    <div class="theme">{{ a }}</div>
     <router-view />
   </div>
 </template>

@@ -4,7 +4,7 @@ import { createRoutFn } from './router'
 import App from './App.vue'
 import { sync } from 'vuex-router-sync'
 
-export function createApp () {
+export function createApp() {
   const store = createStoreFn()
   const router = createRoutFn()
 

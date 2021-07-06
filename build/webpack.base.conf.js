@@ -2,6 +2,7 @@ const { resolve, join } = require('path');
 const nodeModulesPath = resolve(__dirname, '../node_modules');
 const TerserPlugin = require('terser-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const isPro = process.env.NODE_ENV === 'production'
 
@@ -70,7 +71,7 @@ const config = {
       },
     }],
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [new VueLoaderPlugin(), new ESLintPlugin()],
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
