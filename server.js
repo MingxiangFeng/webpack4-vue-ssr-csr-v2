@@ -4,6 +4,7 @@ const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-bundle-renderer');
+
 const history = require('connect-history-api-fallback')
 const serialize = require('serialize-javascript');
 
@@ -16,6 +17,7 @@ const serve = (path, cache) => express.static(resolve(path), {
   maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 })
 
+// 创建ssr渲染构造器
 function createRenderer(bundle, clientManifest) {
   return createBundleRenderer(bundle, {
     runInNewContext: false,
