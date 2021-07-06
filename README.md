@@ -83,7 +83,7 @@ npm run build
 
 # 其他推荐
 - 使用webpack5.x和vue2.x构建csr与ssr的混合mpa架构，大型网站前端架构，前沿！https://github.com/MingxiangFeng/webpack-vue-mpa-ssr-csr-v1
-- 使用webpack5.x，vue2.x搭建的大型网站前端csr架构，前沿！https://github.com/MingxiangFeng/webpack-vue-csr-mpa
+- 使用webpack5.x，vue3.x搭建的大型网站前端csr架构，前沿！https://github.com/MingxiangFeng/webpack-vue-csr-mpa
 - 使用webpack4.x和vue2.x搭建的服务端渲染单页应用。https://github.com/MingxiangFeng/webpack-vue-ssr-spa
 
 
