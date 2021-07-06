@@ -3,9 +3,8 @@ const express = require('express')
 const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
-const { createBundleRenderer } = require('vue-bundle-renderer');
-
 const history = require('connect-history-api-fallback')
+const { createBundleRenderer } = require('vue-bundle-renderer');
 const serialize = require('serialize-javascript');
 
 const isProd = process.env.NODE_ENV === 'production'
