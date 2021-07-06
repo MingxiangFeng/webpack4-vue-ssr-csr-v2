@@ -2,16 +2,16 @@
   "publicPath": "/",
   "all": [
     "css/1.68e6f736ad9faf13c490.css",
-    "css/home.8460bb31a49e3610889f.css",
+    "css/home.ad96b486c13b208638dd.css",
     "home/index.html",
     "js/1.9cfc0021.min.js",
-    "js/home.016a3e82.min.js",
+    "js/home.df019476.min.js",
     "static/.gitkeep",
     "static/1.js"
   ],
   "initial": [
-    "css/home.8460bb31a49e3610889f.css",
-    "js/home.016a3e82.min.js"
+    "css/home.ad96b486c13b208638dd.css",
+    "js/home.df019476.min.js"
   ],
   "async": [
     "css/1.68e6f736ad9faf13c490.css",
@@ -67,7 +67,7 @@
       1,
       4
     ],
-    "0d5cc38f": [
+    "db37c1c2": [
       1,
       4
     ]
