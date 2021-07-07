@@ -59,8 +59,12 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
+    "@xes/xes_fe_log": "^2.1.0",
+    "mitt": "^3.0.0",
+    "vant": "^3.1.2",
     "vue": "^3.1.2",
     "vue-router": "^4.0.10",
+    "vue3-bus": "^1.1.1",
     "vuex": "^4.0.2"
   }
 }
