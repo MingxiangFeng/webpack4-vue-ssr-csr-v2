@@ -88,10 +88,6 @@ function removeClass (el, cls) {
 export default {
   name: 'xes-motai-loading',
   props: {
-    el: {
-      type: Boolean || Object,
-      default: false // 指定的父容器，默认是挂载在body节点, 父元素需要添加 postion: absolute / fixed
-    },
     lockScroll: {
       type: Boolean,
       default: true // 是否锁定不能滚动页面，默认锁屏
@@ -185,11 +181,7 @@ export default {
   },
   methods: {
     close () {
-      this.$unmounted
-
-      window.__XES__LOADING = false
-
-      this.$el.parentNode.removeChild(this.$el)
+      document.body.removeChild(this.$el.parentNode)
 
       if (typeof this.onClose === 'function') {
         this.onClose(this)
@@ -203,6 +195,8 @@ export default {
         }
         this._lockScroll = false
       }
+
+      this.$unmounted
     }
   }
 

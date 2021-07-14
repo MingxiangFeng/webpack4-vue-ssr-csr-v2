@@ -8,20 +8,33 @@
 
 <script>
 import './../css/index.css'
-import Loading from '../Loading'
+import { app } from '../index'
+// import Loading from '../Loading'
+// import Dialog from '../Dialog'
+import Toast from '../Toast'
 export default {
-  mounted() {
+  async mounted() {
     this.$bus.on('sendMsg', (res) => {
       console.log('reseive msg:', res)
     })
-    console.log('child com')
-    const l = Loading({
-      tips: '一些提示',
-      lockScroll: true
-    })
-    setTimeout(() =>{
-      l.close()
-    }, 2000)
+    // const l = Loading({
+    //   tips: '一些提示',
+    //   lockScroll: true
+    // })
+    // setTimeout(() =>{
+    //   l.close()
+    // }, 2000)
+    // const dialogRes = await new Dialog({
+    //   title: 'title',
+    //   content: 'content',
+    //   showCancel: true,
+    // })
+    // console.log('dialogRes==', dialogRes)
+    Toast('message')
+    // const app = createApp()
+    app.config.globalProperties.$aaa = '12333'
+    console.log('this.====', this.$aaa)
+    console.log('this.$isApp===', this.$isApp)
   }
 }
 </script>

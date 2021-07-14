@@ -16,14 +16,7 @@ const createMount = (opts) => {
   } else {
     props = Object.assign(props, opts)
   }
-  const app = createApp(App, {
-    ...props,
-    modelValue: true,
-    remove() {
-      app.unmount(mountNode)
-      document.body.removeChild(mountNode)
-    }
-  })
+  const app = createApp(App, props)
   return app.mount(mountNode)
 }
 

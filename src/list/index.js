@@ -15,3 +15,5 @@ const logParams = {}
 initLog(app, logParams) // 初始化埋点配置
 
 app.mount('#app')
+
+export { app }
