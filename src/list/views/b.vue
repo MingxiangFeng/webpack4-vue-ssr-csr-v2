@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="bb">b page</h1>
+    <h1 class="bb">b page1</h1>
   </div>
 </template>
 

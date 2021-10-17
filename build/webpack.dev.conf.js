@@ -172,7 +172,7 @@ const config = {
     alias: {
       '@': resolve('src'),
       '@static': resolve('static'),
-      vue: 'vue/dist/vue.esm.js'
+      vue: 'vue/dist/vue.runtime.esm-bundler.js'
     },
   },
 };

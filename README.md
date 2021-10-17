@@ -1,8 +1,8 @@
 # 较前沿，稳定的，大型网站前端架构。
 
 # 特性
-- mpa, csr&ssr
-- webpack4, vue2.x, babel8.x, css, scss
+- mpa, csr, node
+- webpack4, vue3.x, babel8.x, css, scss
 - 支持history模式（需在start.js中配置）
 - 默认所有页面支持vw（不需要支持的页面需要在postcss.config.js中配置）
 - 其他
@@ -64,10 +64,3 @@ npm run build
 - 使用webpack5.x和vue2.x构建csr与ssr的混合mpa架构，大型网站前端架构，前沿！https://github.com/MingxiangFeng/webpack-vue-mpa-ssr-csr-v1
 - 使用webpack5.x，vue2.x搭建的大型网站前端csr架构，前沿！https://github.com/MingxiangFeng/webpack-vue-csr-mpa
 - 使用webpack4.x和vue2.x搭建的服务端渲染单页应用。https://github.com/MingxiangFeng/webpack-vue-ssr-spa
-
-
-# Q&S
-- Q: 为什么静态渲染时，样式后渲染呢？
-- S: 本架构开发环境下，静态渲染的编程过程时，没有提取样式文件，所以样式后渲染。生产环境下，样式已提取，并在html文件的head中引入，不会出现此种情况。
-- Q: 什么时候支持webpack5.x，vue3.x 的架构呢？
-- S: 快了，预计2021年6月底7月初能与大家见面。
