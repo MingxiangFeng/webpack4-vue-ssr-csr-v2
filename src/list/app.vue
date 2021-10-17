@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="list">list3</p>
+    <p class="list">xxxxwww</p>
     <router-view />
   </div>
 </template>
